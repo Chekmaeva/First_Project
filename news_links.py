@@ -22,7 +22,6 @@ class MyWin(QtWidgets.QMainWindow):
             self.newsurl.append(i.split('">')[0])
             self.ui.listWidget.addItem(i.split('">')[1].strip())
             
-              
     def AllNews(self):
         row = self.ui.listWidget.currentRow()
         link = 'https://russian.rt.com/news' + self.newsurl[row] 
