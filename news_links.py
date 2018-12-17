@@ -1,4 +1,4 @@
-import sys, re, urllib, html2text # re нужен для того, чтобы получить доступ к информации с определённого сайта
+import sys, re, urllib, html2text
 from urllib import request
 from professions import *
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -24,19 +24,19 @@ class MyWin(QtWidgets.QMainWindow):
             
               
     def AllNews(self):
-        row = self.ui.listWidget.currentRow() # номер строчки из списка с заголовками
-        link = 'https://russian.rt.com/news' + self.newsurl[row] # ссылка на страницу с содержанием заголовка
-        doc=urllib.request.urlopen(link).read().decode('utf-8', errors='ignore') #  получение HTML-кода, соответствующего ссылке
-        t = html2text.HTML2Text() # текст ссылок
-        t.ignore_links=True # чтобы в тексте не просматривались ссылки
+        row = self.ui.listWidget.currentRow()
+        link = 'https://russian.rt.com/news' + self.newsurl[row] 
+        doc=urllib.request.urlopen(link).read().decode('utf-8', errors='ignore')
+        t = html2text.HTML2Text()
+        t.ignore_links=True
         t.body_width=False
-        t.ignore_images=True # чтобы в тексте не просматривались картинки
-        doc = t.handle(doc) # получаем сам текст
-        m = doc.split('\n') # разделим текст на строки, это нужно для того, чтобы убрать всю ненужную информацию и оставить только то, что нам необходимо, мы просто удалим короткие строки, которыми обычно являются ссылки и другая лишняя информация
+        t.ignore_images=True
+        doc = t.handle(doc)
+        m = doc.split('\n')
         strr = ''
         for i in m:
             if len(i) > 120:
-                strr += i + '\n\n' # двойное \n\n специально, чтобы разделить по абзацам
+                strr += i + '\n\n'
         self.ui.textEdit.setText(strr)
                 
         
